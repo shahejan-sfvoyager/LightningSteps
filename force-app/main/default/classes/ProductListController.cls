@@ -1,3 +1,8 @@
+/**
+ * @description This class is used for product list, filter and details related aura methods to LWC 
+ * @author Shahejan
+ * @date 2021-09-25
+ */
 public with sharing class ProductListController {
     public class Filters {
         @AuraEnabled

@@ -1,4 +1,13 @@
+/**
+ * @description This class is used for Order releated aaura methods of LWC
+ * @author Shahejan
+ * @date 2021-09-25
+ */
 public without sharing class OrderController {
+    /**
+     * @description This mehod to create draft order and add product as order line item
+     * @param productId Id of product
+     */
     @AuraEnabled
     public static Map<String,Object> addProductToOrder(String productId) {
         Map<String,Object> response=new Map<String,Object>();
@@ -33,6 +42,10 @@ public without sharing class OrderController {
         return response;
     }
 
+     /**
+     * @description This mehod to get draft order and related product order line items for cart display
+     * @param NA
+     */
     @AuraEnabled
     public static Map<String,Object> fetchCartDetails() {
         Map<String,Object> response=new Map<String,Object>();
@@ -45,6 +58,10 @@ public without sharing class OrderController {
         return response;
     }
 
+    /**
+     * @description This mehod to update draft order related product order line items quantity
+     * @param orderItemRec
+     */
     @AuraEnabled
     public static Map<String,Object> updateItemQuantity(OrderItem orderItemRec) {
         if(orderItemRec!=null){
@@ -56,6 +73,10 @@ public without sharing class OrderController {
         return fetchCartDetails();    
     }
 
+    /**
+     * @description This mehod to update draft order stataus
+     * @param orderId
+     */
     @AuraEnabled
     public static Map<String,Object> updateOrderStatus(String orderId) {
         if(orderId!=null){
