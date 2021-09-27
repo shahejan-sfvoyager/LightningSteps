@@ -1,0 +1,6 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <lightning:utilityBarAPI aura:id="utilitybar" />
+    <lightning:messageChannel type="ProductCartOpened__c"
+            onMessage="{!c.handleCartUtility}" scope="APPLICATION"/>
+    <c:productCart aura:id='lwcCart'/>
+</aura:component>	

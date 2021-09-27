@@ -1,0 +1,14 @@
+.slds-card {
+    background: rgb(243, 242, 242);
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 50rem;
+}
+
+c-product-tile {
+    min-width: 200px;
+    flex: 1;
+}

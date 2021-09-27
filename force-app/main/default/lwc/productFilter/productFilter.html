@@ -1,0 +1,115 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <div class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container" title="Filters" if:false={filterOpen}>
+                    <lightning-button-icon-stateful icon-name="utility:chevronright" selected={filterOpen} onclick={handleFilterSection} alternative-text="Filter"></lightning-button-icon-stateful>
+                  </span>
+                  <span class="slds-icon_container" title="Filters" if:true={filterOpen}>
+                    <lightning-button-icon-stateful icon-name="utility:chevrondown" selected={filterOpen} onclick={handleFilterSection} alternative-text="Filter"></lightning-button-icon-stateful>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                    <a href="#" class="slds-card__header-link slds-truncate" title="Filters">
+                      <span>Filters</span>
+                    </a>
+                  </h2>
+                </div>
+            </div>
+        </h3>
+        <lightning-input label="Search"
+                        type="search"
+                        onchange={handleSearchKeyChange} slot="actions"></lightning-input>
+        <div class="slds-var-m-horizontal_medium" if:true={filterOpen}>            
+            <lightning-layout horizontal-align="spread">
+                <lightning-layout-item padding="around-small">
+                    <lightning-slider
+                        label="Max Price"
+                        step="10"
+                        min="0"
+                        max="1000"
+                        value={maxPrice}
+                        onchange={handleMaxPriceChange}
+                    ></lightning-slider>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <h1>Category</h1>
+                    <template if:true={families.data}>
+                        <template
+                            for:each={families.data.values}
+                            for:item="category"
+                        >
+                            <lightning-input
+                                key={category.value}
+                                label={category.label}
+                                data-filter="families"
+                                data-value={category.value}
+                                type="checkbox"
+                                checked
+                                onchange={handleCheckboxChange}
+                            ></lightning-input>
+                        </template>
+                    </template>
+                    <template if:true={families.error}>
+                        <c-error-panel
+                            type="inlineMessage"
+                            friendly-message="Error loading categories"
+                            errors={families.error}
+                        ></c-error-panel>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <h1>Material</h1>
+                    <template if:true={materials.data}>
+                        <template
+                            for:each={materials.data.values}
+                            for:item="material"
+                        >
+                            <lightning-input
+                                key={material.value}
+                                label={material.label}
+                                data-filter="materials"
+                                data-value={material.value}
+                                type="checkbox"
+                                checked
+                                onchange={handleCheckboxChange}
+                            ></lightning-input>
+                        </template>
+                    </template>
+                    <template if:true={materials.error}>
+                        <c-error-panel
+                            type="inlineMessage"
+                            friendly-message="Error loading materials"
+                            errors={materials.error}
+                        ></c-error-panel>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <h1>Size</h1>
+                    <template if:true={sizes.data}>
+                        <template for:each={sizes.data.values} for:item="size">
+                            <lightning-input
+                                key={size.value}
+                                label={size.label}
+                                data-filter="sizes"
+                                data-value={size.value}
+                                type="checkbox"
+                                checked
+                                onchange={handleCheckboxChange}
+                            ></lightning-input>
+                        </template>
+                    </template>
+                    <template if:true={sizes.error}>
+                        <c-error-panel
+                            type="inlineMessage"
+                            friendly-message="Error loading sizes"
+                            errors={sizes.error}
+                        ></c-error-panel>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

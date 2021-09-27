@@ -1,0 +1,12 @@
+.logo {
+    text-align: center;
+    color: #c23335;
+}
+
+.imgLogo {
+    height: 70px;
+}
+
+.cartBtn{
+    width: -webkit-fill-available;
+}

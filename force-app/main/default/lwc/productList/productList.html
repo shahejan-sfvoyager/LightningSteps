@@ -1,0 +1,23 @@
+<template>
+    <lightning-card>
+        <div slot="footer">
+
+        </div>
+        <p class="slds-var-p-horizontal_small slds-box slds-theme_shade">
+            <template if:true={products.data}>
+                <div class="content slds-scrollable_y">
+                    <template
+                        for:each={products.data.listOfProduct}
+                        for:item="product">
+                        <c-product-tile
+                            key={product.Id}
+                            product={product}
+                            onproductselected={handleProductSelected}
+                            class="slds-var-m-around_x-small">
+                        </c-product-tile>
+                    </template>
+                </div>
+            </template>                    
+        </p>
+    </lightning-card>
+</template>

@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="Cart" ref="cart" label="Cart">
+		Product Cart Component
+	</aura:example>
+</aura:documentation>

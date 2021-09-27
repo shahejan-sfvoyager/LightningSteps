@@ -1,0 +1,53 @@
+<template>
+    <template if:true={recordId}>
+        <lightning-card icon-name="standard:products">                
+            <span slot="title">{productFamily} > {productName}</span>
+            <lightning-button-icon
+                icon-name="utility:expand_alt"
+                slot="actions"
+                onclick={handleNavigateToRecord}
+            ></lightning-button-icon>
+            <div class="slds-var-m-horizontal_medium">
+                <img
+                    if:true={productPictureUrl}
+                    src={productPictureUrl}
+                    class="product"
+                    alt="Product picture"/>
+                    <lightning-record-view-form
+                            record-id={recordId}
+                            object-api-name="Product2" onload={handleRecordLoaded}>
+                        <div class="slds-box">
+                            <lightning-output-field field-name={productSize}>
+                            </lightning-output-field>
+                            <lightning-output-field field-name={productMaterial}>
+                            </lightning-output-field>
+                            <lightning-output-field field-name={productPrice}>
+                            </lightning-output-field>
+                            <lightning-output-field field-name={productDescription}>
+                            </lightning-output-field>
+                        </div>
+                    </lightning-record-view-form>
+            </div>
+            <div slot="footer"> 
+                <template if:false={orderItem}>
+                    <lightning-button variant="brand" label="Add to Cart" title="Add item to Cart" icon-name="utility:add" class="slds-m-left_x-small cartBtn" onclick={handleAddToCart}></lightning-button> 
+                </template>
+                <template if:true={orderItem}>
+                    <p class="slds-var-p-around_small slds-align_absolute-center slds-text-color_success">Product is added to your cart.</p> 
+                    <lightning-button variant="brand" label="Go to Cart" title="Open Cart" icon-name="utility:open" class="slds-m-left_x-small cartBtn" onclick={handleOpenCart}></lightning-button> 
+                </template>
+                <template if:true={orderError}>
+                    <c-error-panel errors={orderError}></c-error-panel>
+                </template>
+            </div>     
+        </lightning-card>
+    </template>
+    <template if:false={recordId}>    
+        <lightning-card icon-name="standard:products">            
+            <div class="logo slds-var-p-around_large">
+                <img src={logoUrl} class="slds-align_absolute-center imgLogo" alt="Company logo" />  
+                <p class="slds-var-p-around_small slds-align_absolute-center logo">Select a product to see details.</p>              
+            </div>              
+        </lightning-card>
+    </template>
+</template>

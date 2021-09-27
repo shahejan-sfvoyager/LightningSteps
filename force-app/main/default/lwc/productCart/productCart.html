@@ -1,0 +1,73 @@
+<template>
+    <template if:false={orderError}>
+        <div class="slds-var-p-around_small">
+            <ul class="slds-has-dividers_bottom-space">
+                <li class="slds-item" if:true={contact}>
+                    <lightning-tile label={contact.Name} href="">
+                        <p class="slds-truncate" title={contact.Email}>{contact.Email}</p>
+                    </lightning-tile>
+                </li>
+                <li class="slds-item" if:true={order}>
+                    <lightning-tile label="Order Details" href="">
+                        <dl class="slds-dl_horizontal">
+                            <dt class="slds-dl_horizontal__label">
+                                <p class="slds-truncate" title="Email">Amount:</p>
+                            </dt>
+                            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate">{order.TotalAmount} $</p>
+                            </dd>
+                        </dl>
+                        <dl class="slds-dl_horizontal">
+                            <dt class="slds-dl_horizontal__label">
+                                <p class="slds-truncate" title="Email">Address:</p>
+                            </dt>
+                            <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                                <p class="slds-truncate">
+                                    <lightning-formatted-address
+                                    street={order.ShippingStreet}
+                                    city={order.ShippingCity} 
+                                    province={order.ShippingState}
+                                    country={order.ShippingCountry}
+                                    postal-code={order.ShippingPostalCode}></lightning-formatted-address>
+                                </p>
+                            </dd>
+                        </dl>
+                    </lightning-tile>
+                </li>
+                <li class="slds-item" if:false={order}>
+                    <p class="slds-var-p-around_small slds-align_absolute-center info">Add a product to Cart to see details.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="slds-var-p-around_small" if:true={orderItems}>
+            <ul class="slds-has-dividers_bottom-space">
+                <template for:each={orderItems}
+                            for:item="item">
+                    <li class="slds-item" key={item.Id}>
+                        <article class="slds-tile slds-tile_board">
+                            <h3 class="slds-tile__title slds-truncate" title={item.Product2.Name}>
+                            <a href="#">{item.Product2.Name}</a>
+                            </h3>
+                            <div class="slds-tile__detail">
+                            <p class="slds-text-heading_medium">Total Price: ${item.TotalPrice}</p>
+                            <p class="slds-truncate">
+                                Quantity: {item.Quantity}
+                            </p>
+                            <p class="slds-truncate slds-align_absolute-center">
+                                <lightning-button-group>
+                                    <lightning-button-icon name={item.Id} icon-name="utility:add" alternative-text="Add"   class="slds-m-left_xx-small" title="Add" size="x-small" onclick={handleItemAdd}></lightning-button-icon>
+                                    <lightning-button-icon name={item.Id} icon-name="utility:delete" alternative-text="Delete"   class="slds-m-left_xx-small" title="Delete" size="x-small" onclick={handleItemRemove}></lightning-button-icon>
+                                </lightning-button-group>
+                            </p>
+                            </div>
+                        </article>
+                    </li>                
+                </template>
+            </ul>
+            <lightning-button variant="brand" label="Place Order" title="Place Order" icon-name="utility:serialized_product_transaction" class="slds-m-left_x-small slds-m-top_x-small slds-align_absolute-center cartBtn" onclick={handlePlaceOrder}></lightning-button> 
+        </div>
+    </template>
+    <template if:true={orderError}>
+        <c-error-panel errors={orderError}></c-error-panel>
+    </template>
+</template>
