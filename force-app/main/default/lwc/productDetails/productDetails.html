@@ -30,11 +30,11 @@
             </div>
             <div slot="footer"> 
                 <template if:false={orderItem}>
-                    <lightning-button variant="brand" label="Add to Cart" title="Add item to Cart" icon-name="utility:add" class="slds-m-left_x-small cartBtn" onclick={handleAddToCart}></lightning-button> 
+                    <lightning-button variant="brand" label="Add to Cart" title="Add item to Cart" icon-name="utility:add" class="slds-m-left_x-small slds-align_absolute-center cartBtn" onclick={handleAddToCart}></lightning-button> 
                 </template>
                 <template if:true={orderItem}>
                     <p class="slds-var-p-around_small slds-align_absolute-center slds-text-color_success">Product is added to your cart.</p> 
-                    <lightning-button variant="brand" label="Go to Cart" title="Open Cart" icon-name="utility:open" class="slds-m-left_x-small cartBtn" onclick={handleOpenCart}></lightning-button> 
+                    <lightning-button variant="brand" label="Go to Cart" title="Open Cart" icon-name="utility:open" class="slds-m-left_x-small slds-align_absolute-center cartBtn" onclick={handleOpenCart}></lightning-button> 
                 </template>
                 <template if:true={orderError}>
                     <c-error-panel errors={orderError}></c-error-panel>
